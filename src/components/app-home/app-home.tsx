@@ -12,14 +12,16 @@ export class AppHome {
   @State() conversations : any[] = [];
 
   componentDidLoad() {
+    const that = this
     getChats().subscribe((data:any) => {
-      console.log(data);
-      
-      this.conversations = data.recent
-
-      this.history.push('/chat', this.conversations[0])
+      that.conversations = data.recent
     })
-    console.log(this.history);
+    
+  }
+
+  componentDidUpdate() {
+    console.log('Component did update');
+    console.log(this.conversations);
     
   }
 
@@ -41,15 +43,15 @@ export class AppHome {
           <ion-label>Recent Conversations</ion-label>
         </ion-list-header>
           {this.conversations.map(conv => 
-            <ion-item >
-              <ion-avatar slot="start">
-                <img src={conv.imageUrl}></img>
-              </ion-avatar>
-              <ion-label>
-                <h2>{conv.name}</h2>
-                <p>{conv.email}</p>
-              </ion-label>
-              <ion-icon color={conv.status === "online" ? 'success' : 'danger'} name="radio-button-on" slot="end"></ion-icon>
+              <ion-item >
+                <ion-avatar slot="start">
+                  <img src={conv.imageUrl}></img>
+                </ion-avatar>
+                <ion-label>
+                  <h2>{conv.name}</h2>
+                  <p>{conv.email}</p>
+                </ion-label>
+                <ion-icon color={conv.status === "online" ? 'success' : 'danger'} name="radio-button-on" slot="end"></ion-icon>
 
             </ion-item>
           )}

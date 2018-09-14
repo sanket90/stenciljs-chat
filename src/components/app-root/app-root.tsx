@@ -52,12 +52,14 @@ export class AppRoot {
   render() {
     return (
       <ion-app>
-        <stencil-router>
-          <stencil-route url="/" component="app-home" exact={true} />
-          <stencil-route url="/profile/:name" component="app-profile" />
-          <stencil-route url="/chat" component="chat-room" />
-          <stencil-route url="/login" component="sign-in" />
-          <stencil-route-redirect url={this.isLoggedin ? '/' : '/login'} />
+        <stencil-router root="/">
+          <stencil-route-switch scrollTopOffset={0}>
+            <stencil-route url="/" component="app-home" exact={true} />
+            <stencil-route url="/profile/:name" component="app-profile" />
+            <stencil-route url="/chat" component="chat-room" />
+            <stencil-route url="/login" component="sign-in" />
+            <stencil-route-redirect url={this.isLoggedin ? '/' : '/login'} />
+          </stencil-route-switch>
         </stencil-router>
       </ion-app>
     );
